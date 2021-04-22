@@ -7,3 +7,4 @@ FindVuln/.pydevproject
 FindVuln/.gradle
 FindVuln/.settings
 .DS_Store
+/bin/

@@ -18,6 +18,7 @@ package findvuln;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
 
 import findvuln.CVEScanner.CVE_Scanner;
@@ -26,12 +27,10 @@ import ghidra.app.services.AbstractAnalyzer;
 import ghidra.app.services.AnalyzerType;
 import ghidra.app.util.importer.MessageLog;
 import ghidra.framework.Application;
-import ghidra.framework.data.ProjectFileManager;
 import ghidra.framework.model.ProjectLocator;
 import ghidra.program.model.address.AddressSetView;
 import ghidra.program.model.listing.Program;
 import ghidra.util.Msg;
-import ghidra.util.NotOwnerException;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
@@ -98,12 +97,16 @@ public class FindVulnAnalyzer extends AbstractAnalyzer {
 				String bin = ExtractScript.wslpathConvert(program.getExecutablePath(), this, 'a');
 				String script_path = ExtractScript.wslpathConvert("\"" + rf.getAbsolutePath() + "\"", this, 'u');
 
-				//ExtractScript.main(bin, script_path, "/tmp", this, "wsl");
+				String dir = "tmp";
+				
+				ExtractScript.main(bin, script_path, "/"+dir, this, "wsl");
 				
 				
 				
 				
-				CVE_Scanner.main(new File("\\\\wsl$\\Ubuntu\\tmp\\_"+"neo.bin"+".extracted\\jffs2-root\\fs_1\\bin"));
+				Connection cve_scanner_conn = CVE_Scanner.main(new File("\\\\wsl$\\Ubuntu\\"+dir+"\\_"+program.getName()+".extracted\\"));
+				
+				cve_scanner_conn.close();
 				
 			}
 
@@ -124,7 +127,7 @@ public class FindVulnAnalyzer extends AbstractAnalyzer {
 			
 			
 			
-			// createWorkingDir(program.getExecutablePath() +"/ghidraExt");
+			
 
 			/*
 			 * Move all extracted binaries into the project. Create sub folders within the
@@ -187,40 +190,9 @@ public class FindVulnAnalyzer extends AbstractAnalyzer {
 	
 	
 	
-	private void walk(String path) {
-
-		File root = new File(path);
-		File[] list = root.listFiles();
-
-		if (list == null)
-			return;
-
-		for (File f : list) {
-			if (f.isDirectory()) {
-				walk(f.getAbsolutePath());
-				Msg.info(this, "Dir:" + f.getAbsoluteFile());
-			} else {
-				Msg.info(this, "File:" + f.getAbsoluteFile());
-
-			}
-		}
-	}
-
-	private void createWorkingDir(String path) {
-
-		File newDir = new File(path);
-
-		boolean created = newDir.mkdir();
-
-		String status = created ? "" : " not";
-
-		Msg.info(this, "DIR was" + status + " created");
-
-	}
-
 	@Override
 	public void analysisEnded(Program program) {
-		// Drop the database and end the analysis
+		
 		super.analysisEnded(program);
 	}
 }
