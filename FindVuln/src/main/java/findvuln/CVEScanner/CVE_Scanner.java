@@ -89,6 +89,7 @@ public class CVE_Scanner {
 			Msg.info(new CVE_Scanner(), version_);
 			
 			
+			
 			Statement statement = conn.createStatement();
 			statement.setQueryTimeout(5);
 			
@@ -130,11 +131,7 @@ public class CVE_Scanner {
 			ResultSet rs2 = statement.executeQuery(query_any_range);
 			
 			
-			
-		
-			
-			
-			
+	
 			
 			while (rs2.next()) {
 				
