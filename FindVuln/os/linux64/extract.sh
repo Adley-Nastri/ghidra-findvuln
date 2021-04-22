@@ -15,7 +15,7 @@ rm -rf $bwext/_$base_name.extracted
 binwalk -e $1 --rm -C $bwext
 
 rootfs="squashfs-root" #algorithm to find rootfs. hardcoded atm
-rfs_loc=$bwext/_$base_name.extracted/$rootfs
+rfs_loc=$bwext/_$base_name.extracted/
 
 find $rfs_loc -maxdepth 3 -type f -exec binwalk {} --dd=.$ff1 --dd=.$ff2 --directory $rfs_loc  -y $ff1 -y $ff2 -v -f $log_dir/binwalk_ext_out.csv --csv \;
 

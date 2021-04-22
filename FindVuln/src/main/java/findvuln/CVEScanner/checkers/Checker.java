@@ -39,6 +39,7 @@ public class Checker {
 				
 				pat.matcher(filename);
 				
+				
 				boolean anyMatch = FILENAME_PATTERNS.stream().anyMatch(str -> str.equals(filename));
 				
 				
