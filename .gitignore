@@ -1,0 +1,9 @@
+FindVuln/bin/
+FindVuln/dist/
+FindVuln/build/
+FindVuln/.classpath
+FindVuln/.project
+FindVuln/.pydevproject
+FindVuln/.gradle
+FindVuln/.settings
+.DS_Store
