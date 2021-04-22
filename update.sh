@@ -1,13 +1,12 @@
 #!/usr/bin/env bash
 
 echo "[+] Removing old database"
-rm -f database.d3v
+rm -f FindVuln/data/cve.db
 
 echo "[+] Downloading new database"
-wget https://github.com/d3v1l401/FindCrypt-Ghidra/raw/master/findcrypt_ghidra/database.d3v
+wget https://github.com/Adley-Nastri/ghidra-findvuln/blob/master/FindVuln/data/cve.db
 
-echo "[+] Converting database and adding to the plugin"
-rm -f FindCrypt/data/database.d3v
-python convert_db.py database.d3v FindCrypt/data/database.d3v
+echo "[+] Installing new database"
+mv cve.db FindVuln/data/cve.db
 
 echo "[+] Done! Now you can git add the changes!"
