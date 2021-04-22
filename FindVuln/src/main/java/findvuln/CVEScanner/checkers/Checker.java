@@ -37,11 +37,7 @@ public class Checker {
 				//String index_of = filename.get(filename.indexOf(pattern));
 				
 				
-				Matcher mat = pat.matcher(filename);
-				
-				//String mpp = mat.pattern().pattern();
-				
-				//String www = "";
+				pat.matcher(filename);
 				
 				boolean anyMatch = FILENAME_PATTERNS.stream().anyMatch(str -> str.equals(filename));
 				
@@ -49,8 +45,6 @@ public class Checker {
 				if(anyMatch) {
 					
 					
-					//
-					String str = "thing found";
 					//System.out.println(str);
 					version_info.put("is_or_contains", "is");
 				}
