@@ -20,8 +20,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import findvuln.CVEScanner.CVE_Scanner;
+import findvuln.CVEScanner.VulnFile;
 import generic.jar.ResourceFile;
 import ghidra.app.services.AbstractAnalyzer;
 import ghidra.app.services.AnalyzerType;
@@ -44,7 +50,7 @@ public class FindVulnAnalyzer extends AbstractAnalyzer {
 
 	
 	
-
+    Connection cve_scanner_conn ;
 
 	public FindVulnAnalyzer() {
 		super("Find Vuln Extractor", "Extract firmware to then be used in finding CVEs within firmware binaries",
@@ -68,7 +74,9 @@ public class FindVulnAnalyzer extends AbstractAnalyzer {
 
 	public boolean added(Program program, AddressSetView set, TaskMonitor monitor, MessageLog log)
 			throws CancelledException {
-
+		
+		
+		
 		try {
 			
 			
@@ -104,9 +112,50 @@ public class FindVulnAnalyzer extends AbstractAnalyzer {
 				
 				
 				
-				Connection cve_scanner_conn = CVE_Scanner.main(new File("\\\\wsl$\\Ubuntu\\"+dir+"\\_"+program.getName()+".extracted\\"));
+				cve_scanner_conn = CVE_Scanner.main(new File("\\\\wsl$\\Ubuntu\\"+dir+"\\_"+program.getName()+".extracted\\"));
 				
-				cve_scanner_conn.close();
+				
+				
+				CVE_Scanner.cve_map.entrySet().stream().distinct().forEach(e -> Msg.debug(this, e.getKey() + " " +e.getValue().version + " " + e.getValue().cve_list));
+				
+				
+				ArrayList<String> unique_cves = new ArrayList<String>();
+				
+				
+				
+				
+				for(var item : CVE_Scanner.cve_map.entrySet()) {
+					
+					
+					
+					
+					unique_cves.addAll(item.getValue().cve_list);
+					
+					
+					
+					
+					
+				}
+				
+				Set<String> set_ = new HashSet<>(unique_cves);
+				
+				unique_cves.clear();
+				unique_cves.addAll(set_);
+				
+				
+				int cve_count = unique_cves.size();
+				
+				
+				
+				
+				//List affected files
+				Msg.debug(this, "\nAffected Files\n");
+				CVE_Scanner.cve_map.entrySet().stream().distinct().forEach(e -> Msg.debug(this, e.getKey() +  " " + e.getValue().filepath));
+				
+				
+				Msg.debug(this, "\nTotal Unique CVEs: "+ cve_count);
+				
+				//CVE_Scanner.cve_map.entrySet().stream().distinct().forEach(e -> e.getValue().size());
 				
 			}
 
@@ -175,18 +224,6 @@ public class FindVulnAnalyzer extends AbstractAnalyzer {
 		return true;
 	}
 
-	
-	
-	
-	File create_File(String path) {
-		
-		File file = new File(path);
-		
-		return file;
-		
-	}
-	
-	
 	
 	
 	
