@@ -25,31 +25,20 @@ public class Checker {
 	
 	
 	
-	@SuppressWarnings("unlikely-arg-type")
 	public HashMap<String, String> get_version(String lines[], String filename) {
 		
 		
 		HashMap<String, String> version_info = new HashMap<String, String>();
 
-			for (var pattern : FILENAME_PATTERNS) {
-				Pattern pat = Pattern.compile(pattern);
-				
-				//String index_of = filename.get(filename.indexOf(pattern));
+			
+			boolean anyMatch = FILENAME_PATTERNS.stream().anyMatch(str -> str.equals(filename));
 				
 				
-				pat.matcher(filename);
-				
-				
-				boolean anyMatch = FILENAME_PATTERNS.stream().anyMatch(str -> str.equals(filename));
-				
-				
-				if(anyMatch) {
+			if(anyMatch) {
 					
-					
-					//System.out.println(str);
-					version_info.put("is_or_contains", "is");
-				}
+				version_info.put("is_or_contains", "is");
 			}
+			
 			
 			if (!version_info.containsKey("is_or_contains") && !guess_contains(lines)) {
 				

@@ -13,7 +13,6 @@ import findvuln.Process;
 
 public class Util {
 
-	private static List<String> cmd;
 	public static String regex_find(String[] lines,  List<String> VERSION_PATTERNS) {
 		
 		String new_guess = "";
@@ -67,7 +66,6 @@ public static String wslpathConvert(String pathIn, char p) throws IOException {
 	public static String[] Strings(File file) throws IOException {
 		
 		
-		//String[] arr = {"", ""};
 		
 		List<String> cmd;		
 		
@@ -79,9 +77,6 @@ public static String wslpathConvert(String pathIn, char p) throws IOException {
 		
 		Process.run(cmd);
 		
-		
-		//read newly created file into buffered reader. pass in a FileReader NOT input stream
-		//as InputStreamReader CANNOT OVERRIDE BUFFER SIZE
 		
 		
 		ArrayList<String> al = new ArrayList<String>();
@@ -111,15 +106,11 @@ public static String wslpathConvert(String pathIn, char p) throws IOException {
 		
 		String[] arr = al.toArray(new String[al.size()]);
 		
-		
 		cmd = Arrays.asList("cmd.exe", "/C", "wsl rm", converted+ ".strings");
 		
 		Process.run(cmd);
 		
 		return arr;
-		
-		
-		
 		
 		
 		

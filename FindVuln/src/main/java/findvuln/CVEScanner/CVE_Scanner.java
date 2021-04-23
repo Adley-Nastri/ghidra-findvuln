@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class CVE_Scanner {
     //Step 4 Cross reference CVE data from database
 	//String[] arr = {"dnsmasq-2.20", "part of OpenSSL 1.0.2f ","BusyBox v1.22.1", "curl 7.67.0"};
 	
-	
+	public static HashMap<String, VulnFile> cve_map = new HashMap<String, VulnFile>();
 	
 	
 	
@@ -79,13 +80,13 @@ public class CVE_Scanner {
 			
 			String this_file = "This file " +checker_version.get("is_or_contains") + " " + checker.VENDOR_PRODUCT.get(1);
 			
-			//System.out.println(this_file);
+			
 			Msg.info(new CVE_Scanner(), this_file);
 			
 			
 			String version_ = "Version : "+checker_version.get("version");
 			
-			//System.out.println(version_);
+			
 			Msg.info(new CVE_Scanner(), version_);
 			
 			
@@ -226,6 +227,18 @@ public class CVE_Scanner {
 				Msg.debug(new CVE_Scanner(), item);
 			}
 			
+			
+			
+			
+			
+			
+			VulnFile vulnFile = new VulnFile(file.getAbsolutePath(), checker_version.get("version"), cve_list);
+			
+			
+			
+			
+			cve_map.put(checker.VENDOR_PRODUCT.get(1), vulnFile);
+			
 			String cve_size = "\n"+cve_list.size() + " CVEs";
 			
 			Msg.info(new CVE_Scanner(),cve_size +"\n");
@@ -257,11 +270,11 @@ public class CVE_Scanner {
 		for (File f : list) {
 			if (f.isDirectory() || !Files.exists(f.toPath())) {
 				walk(f.getPath(), checkers);
-				//Msg.info(this, "Dir:" + f.getAbsoluteFile());
-			} else {
-				//Msg.info(this, "File:" + f.getAbsoluteFile());
 				
-				//System.out.println(f.getAbsolutePath());
+			} else {
+				
+				
+				
 				Msg.info(new CVE_Scanner() ,f.getAbsoluteFile());
 				
 				
