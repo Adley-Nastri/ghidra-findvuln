@@ -98,7 +98,7 @@ public class FindVulnAnalyzer extends AbstractAnalyzer {
 
 				String dir = "tmp";
 				
-				//ExtractScript.main(bin, script_path, "/"+dir, this, "wsl");
+				ExtractScript.main(bin, script_path, "/"+dir, this, "wsl");
 				
 				
 				cve_scanner_conn = CVE_Scanner.main(new File("\\\\wsl$\\Ubuntu\\"+dir+"\\_"+program.getName()+".extracted\\"));
