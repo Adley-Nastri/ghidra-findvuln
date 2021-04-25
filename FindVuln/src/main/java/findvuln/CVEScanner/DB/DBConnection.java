@@ -23,11 +23,11 @@ public class DBConnection {
 			
 			
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
-		Msg.error(this, rf.getAbsolutePath());
+		Msg.debug(this, rf.getAbsolutePath());
 		location = rf.getAbsolutePath();
 		
 		try {
@@ -36,7 +36,7 @@ public class DBConnection {
 			
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			System.err.println(e.getMessage());
 		}
 		

@@ -116,57 +116,6 @@ public static String wslpathConvert(String pathIn, char p) throws IOException {
 		
 	}
 		
-		/*
-		 * //List<String> cmd;
-		 * 
-		 * 
-		 * //cmd = Arrays.asList("cmd.exe", "/C", "wsl strings ", file);
-		 * 
-		 * 
-		 * 
-		 * //String[] arr = Process.run(cmd);
-		 * 
-		 * ArrayList<String> al = new ArrayList<String>();
-		 * 
-		 * 
-		 * int buff_size = 16 * 1024;
-		 * 
-		 * 
-		 * BufferedReader reader = new BufferedReader(
-		 * 
-		 * new FileReader(file), buff_size );
-		 * 
-		 * Pattern pattern = Pattern.compile("[ -~]");
-		 * 
-		 * String line;
-		 * 
-		 * while ((line = reader.readLine()) != null) {
-		 * 
-		 * 
-		 * Matcher match = pattern.matcher(line);
-		 * 
-		 * while (match.find()) {
-		 * 
-		 * int start = match.start(0);
-		 * 
-		 * int end = match.end(0);
-		 * 
-		 * 
-		 * al.add(line.substring(start,end));
-		 * 
-		 * }
-		 * 
-		 * }
-		 * 
-		 * reader.close();
-		 * 
-		 * String[] arr = al.toArray(new String[al.size()]);
-		 * 
-		 * 
-		 * 
-		 * 
-		 * return arr;
-		 */
 		
 		
 	

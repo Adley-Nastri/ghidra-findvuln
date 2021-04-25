@@ -31,7 +31,6 @@ public class CVE_Scanner {
     //Step 2 Parse binaries
     //Step 3 Scan versions
     //Step 4 Cross reference CVE data from database
-	//String[] arr = {"dnsmasq-2.20", "part of OpenSSL 1.0.2f ","BusyBox v1.22.1", "curl 7.67.0"};
 	
 	public static HashMap<String, VulnFile> cve_map = new HashMap<String, VulnFile>();
 	
@@ -42,7 +41,6 @@ public class CVE_Scanner {
 	
 	public static Connection main(File rootFolder) throws SQLException, IOException {
 		
-		//File rootFolder = new File("\\\\wsl$\\Ubuntu\\tmp\\_neo.bin.extracted\\");
 		
 		
 		Checker[] checkers = {new Busybox(), new Curl(), new Libcurl(), new Hostapd()};
@@ -63,16 +61,13 @@ public class CVE_Scanner {
 		
 		
 
-		//String bin = Util.wslpathConvert(file.getAbsolutePath().replace("\\", "\\\\"), 'a');
+		
 		
 		
 		
 		var checker_version = checker.get_version(scan_array, file.getName()); 
 		
 		
-		
-		//Add logic for when file ISNT the scanned binary. So when result is UNKNOWN, say the file can't be for sure
-		//if .get("version") not "UNKNOWN", then say it is the relevant binary
 		
 		
 		
@@ -81,13 +76,13 @@ public class CVE_Scanner {
 			String this_file = "This file " +checker_version.get("is_or_contains") + " " + checker.VENDOR_PRODUCT.get(1);
 			
 			
-			Msg.info(new CVE_Scanner(), this_file);
+			Msg.info(CVE_Scanner.class, this_file);
 			
 			
 			String version_ = "Version : "+checker_version.get("version");
 			
 			
-			Msg.info(new CVE_Scanner(), version_);
+			Msg.info(CVE_Scanner.class, version_);
 			
 			
 			
@@ -136,7 +131,6 @@ public class CVE_Scanner {
 			
 			while (rs2.next()) {
 				
-				//System.out.println("cve_number = "+ rs.getString("cve_number"));
 				
 				DefaultArtifactVersion parsed_version = new DefaultArtifactVersion(checker_version.get("version"));
 				
@@ -165,14 +159,14 @@ public class CVE_Scanner {
 				
 				if(!versionStartIncluding.equals("") && parsed_version.compareTo(VSI) >= 0 ) {
 					
-					//System.out.println(parsed_version.compareTo(VSI) + " "+versionStartIncluding);
+					
 					passes_start = true;
 				}
 				
 				
 				if(!versionStartExcluding.equals("") && parsed_version.compareTo(VSE) > 0 ) {
 					
-					//System.out.println(parsed_version.compareTo(VSI) + " "+versionStartIncluding);
+					
 					passes_start = true;
 				}
 				
@@ -191,7 +185,7 @@ public class CVE_Scanner {
 				if(!versionEndIncluding.equals("") && parsed_version.compareTo(VEI) <= 0) {
 					
 					
-						//System.out.println(parsed_version.compareTo(VEI) + " "+versionEndIncluding);
+						
 						passes_end = true;
 						
 					
@@ -201,7 +195,7 @@ public class CVE_Scanner {
 				if(!versionEndExcluding.equals("") && parsed_version.compareTo(VEE) < 0) {
 					
 					
-						//System.out.println(parsed_version.compareTo(VEI) + " "+versionEndIncluding);
+						
 						passes_end = true;
 					
 				
@@ -224,7 +218,7 @@ public class CVE_Scanner {
 			
 			
 			for (var item : cve_list) {
-				Msg.debug(new CVE_Scanner(), item);
+				Msg.debug(CVE_Scanner.class, item);
 			}
 			
 			
@@ -241,7 +235,7 @@ public class CVE_Scanner {
 			
 			String cve_size = "\n"+cve_list.size() + " CVEs";
 			
-			Msg.info(new CVE_Scanner(),cve_size +"\n");
+			Msg.info(CVE_Scanner.class,cve_size +"\n");
 			
 			
 
@@ -251,7 +245,7 @@ public class CVE_Scanner {
 		else {
 			String file_not_type = "File is not of type '" + checker.VENDOR_PRODUCT.get(1)+"'";
 			
-			Msg.info(new CVE_Scanner(), file_not_type);
+			Msg.info(CVE_Scanner.class, file_not_type);
 		}
 		
 		
@@ -275,7 +269,7 @@ public class CVE_Scanner {
 				
 				
 				
-				Msg.info(new CVE_Scanner() ,f.getAbsoluteFile());
+				Msg.info(CVE_Scanner.class ,f.getAbsoluteFile());
 				
 				
 				String[] scan_file_arr = scan_file(f);
@@ -287,7 +281,7 @@ public class CVE_Scanner {
 				}
 				
 				System.out.println();
-				Msg.info(new CVE_Scanner() ,"\n");
+				Msg.info(CVE_Scanner.class ,"\n");
 			}
 		}
 	}
@@ -295,17 +289,7 @@ public class CVE_Scanner {
 	public static String[] scan_file(File file) throws IOException {
 		
 		
-		
-		//Msg.info(this, "Scanning file : "+file.getName());
-		
-		
-		
-//		if(!file.canExecute())
-//		{
-//			return null;
-//		}
-//		
-		//String[] string_arr = Arrays.asList(null);
+	
 		
 		String[] strings_arr = Util.Strings(file);
 		

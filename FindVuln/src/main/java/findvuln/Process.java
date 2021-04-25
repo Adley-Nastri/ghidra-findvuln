@@ -28,7 +28,6 @@ public class Process {
 		
 		
 		
-		
 		try (var reader = new BufferedReader(
 	            new InputStreamReader(process.getInputStream())))
 			{
@@ -69,53 +68,11 @@ public class Process {
 		pB.start();
 		
 		
-//		ArrayList<String> al = new ArrayList<String>();
-//		
-//		try (var reader = new BufferedReader(
-//	            new InputStreamReader(process.getInputStream() ,"UTF-8"), 1024 * 16))
-//			{
-//					
-//		            String line ;
-//		            
-//		            
-//
-//		            while ((line = reader.readLine()) != null) 
-//		            {
-//		            
-//		               
-//						/*
-//						 * if(!line.equals("")) { //output = line; al.add(line); }
-//						 */
-//		            	
-//		             
-//		               al.add(line);
-//		               
-//		            }
-//		            
-//		           
-//		         
-//
-//		   }
-//		
-//	
-//		catch (IOException e) {
-//			
-//			System.out.println(e);
-//		}
-//		
-		//int al_size = al.size();
-		//String[] arr = al.toArray(new String[al.size()]);
-		
-		
 		String[] arr = {"", ""};
 		return arr;
 	}
 		
 		
-		
-	
-
-
 
 
 	public static String runWithBR(List<String> cmd) throws IOException {
@@ -128,8 +85,7 @@ public class Process {
 		
 		var process = pB.start();
 		
-		
-		
+				
 		
 		try (var reader = new BufferedReader(
 	            new InputStreamReader(process.getInputStream())))
