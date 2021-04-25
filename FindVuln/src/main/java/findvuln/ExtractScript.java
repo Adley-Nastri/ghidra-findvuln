@@ -33,8 +33,7 @@ public class ExtractScript {
 					
 					
 		Process.run(cmd, obj);			
-				
-			
+					
 			
 	}
 		
@@ -43,7 +42,6 @@ public class ExtractScript {
 	public static String wslpathConvert(String pathIn, Object obj, char p) throws IOException {
 		
 			
-		
 		List<String> cmd = Arrays.asList("cmd.exe", "/C", "wsl wslpath -"+p+" "+pathIn);
 		
 		
